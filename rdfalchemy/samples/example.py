@@ -17,7 +17,8 @@ VCARD = Namespace("http://www.w3.org/2006/vcard/ns#")
 rdfSubject.db = ConjunctiveGraph()
 
 rdfSubject.db.load(
-    os.path.join(os.path.split(__file__)[:-1])[0] + '/data/example.n3',
+    #os.path.join(os.path.split(__file__)[:-1])[0] + 'data/example.n3',
+    'data/example.n3',
     format='n3')
 
 
