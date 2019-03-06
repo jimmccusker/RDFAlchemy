@@ -5,6 +5,7 @@ Literal.py
 Created by Philip Cooper on 2008-02-09.
 Copyright (c) 2008 Openvest. All rights reserved.
 """
+from past.builtins import basestring
 from rdflib import (
     Namespace,
     Literal
@@ -37,12 +38,12 @@ if not _log.handlers:
 ###############################################################################
 ## Default behavior returns untyped literals as literals
 ## this brings untyped literals back as unicode strings
-bindLiteral(None, unicode)
+bindLiteral(None, str)
 
 ###############################################################################
 ## Default behavior returns string literals as literals
 ## this brings  string literals back as unicode strings
-bindLiteral(XSD.string, unicode)
+bindLiteral(XSD.string, str)
 
 ###############################################################################
 ## Let's make toPython return a datetime if the literal has fractional seconds

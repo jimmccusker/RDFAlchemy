@@ -1,10 +1,12 @@
 """
 
 """
+from future import standard_library
+standard_library.install_aliases()
 import os
 import re
 import cgi
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 
 def create_engine(url='', identifier="", create=False):
@@ -151,7 +153,7 @@ def _parse_rfc1738_args(name):
             'username': username, 'password': password, 'host': host,
             'port': port, 'database': database, 'query': query}
         if opts['password'] is not None:
-            opts['password'] = urllib.unquote_plus(opts['password'])
+            opts['password'] = urllib.parse.unquote_plus(opts['password'])
         return (name, opts)
     else:
         raise ValueError("Could not parse rfc1738 URL from string '%s'" % name)

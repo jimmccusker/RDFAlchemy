@@ -1,4 +1,7 @@
 # from rdfalchemy import Literal, BNode, Namespace, URIRef
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
 from rdfalchemy.sparql import SPARQLGraph, DumpSink
 from rdfalchemy.sparql.parsers import (
     _BRTRSPARQLHandler,
@@ -8,9 +11,9 @@ from rdfalchemy.sparql.parsers import (
 from rdflib.plugins.serializers.nt import _quoteLiteral
 
 from rdflib.plugins.parsers.ntriples import NTriplesParser
-
-from urllib2 import urlopen, Request, HTTPError
-from urllib import urlencode
+from urllib.request import urlopen, Request
+from urllib.error import HTTPError
+from urllib.parse import urlencode
 
 import os
 # import re
@@ -117,7 +120,7 @@ class SesameGraph(SPARQLGraph):
         # req.data = "%s %s %s .\n" % (
         #     s.n3(), p.n3(), _xmlcharref_encode(o.n3()))
         req.data = "<%s> %s %s .\n" % (
-            _xmlcharref_encode(unicode(s)),
+            _xmlcharref_encode(str(s)),
             p.n3(),
             _xmlcharref_encode(o.n3()))
 
@@ -188,7 +191,7 @@ class SesameGraph(SPARQLGraph):
 
     def qname(self, uri):
         """turn uri into a qname given self.namespaces"""
-        for p, n in self.namespaces.items():
+        for p, n in list(self.namespaces.items()):
             if uri.startswith(n):
                 return "%s:%s" % (p, uri[len(n):])
         return uri

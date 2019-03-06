@@ -1,3 +1,5 @@
+from builtins import next
+from builtins import range
 import rdfalchemy
 from rdfalchemy.samples.doap import FOAF
 from rdfalchemy.samples.foaf import Person
@@ -45,7 +47,7 @@ def test_list():
 
 def test_seq():
     p = next(Person.ClassInstances())
-    p.c = range(10)
+    p.c = list(range(10))
     assert len(Person.db) == 24
 
     p.c = ['things', 44]

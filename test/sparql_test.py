@@ -6,6 +6,7 @@ Created by Philip Cooper on 2008-02-27.
 Copyright (c) 2008 Openvest. All rights reserved.
 """
 
+from builtins import object
 from rdfalchemy.sparql import SPARQLGraph
 from rdfalchemy.sparql.sesame2 import SesameGraph
 from rdfalchemy import URIRef
@@ -13,7 +14,7 @@ from decimal import Decimal
 import unittest
 
 
-class sparql_test:
+class sparql_test(object):
     def __init__(self):
         pass
 

@@ -8,6 +8,7 @@ Copyright (c) 2008 Openvest.
 BSD License.
 """
 from __future__ import print_function
+from builtins import str
 from rdfalchemy.sparql import SPARQLGraph
 from rdfalchemy import __version__
 import sys

@@ -1,5 +1,7 @@
 from __future__ import print_function
-import urllib2
+from future import standard_library
+standard_library.install_aliases()
+import urllib.request, urllib.error, urllib.parse
 import os
 #import sys
 from itertools import islice
@@ -82,9 +84,9 @@ if __name__ == '__main__':
 
     # Allows to debug SPARQLWrapper queries to remote endpoint
     if 0:
-        handler = urllib2.HTTPHandler(debuglevel=1)
-        opener = urllib2.build_opener(handler)
-        urllib2.install_opener(opener)
+        handler = urllib.request.HTTPHandler(debuglevel=1)
+        opener = urllib.request.build_opener(handler)
+        urllib.request.install_opener(opener)
 
 
     # Declare a remote RDFLib SPARQL Store

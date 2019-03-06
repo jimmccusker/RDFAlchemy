@@ -12,6 +12,7 @@ Copyright (c) 2008 Openvest. All rights reserved.
 """
 from __future__ import absolute_import
 
+from builtins import str
 from rdfalchemy import (
     rdfSubject,
     RDF,
@@ -68,7 +69,7 @@ class rdfsSubject(rdfSubject, Identifier):
             obj = type(resUri.resUri).__new__(cls, resUri.resUri)
             obj._nodetype = type(resUri.resUri)
         # create one from a <uri> or _:bnode string
-        elif isinstance(resUri, (str, unicode)):
+        elif isinstance(resUri, (str, str)):
             if resUri[0] == "<" and resUri[-1] == ">":
                 obj = URIRef.__new__(cls, resUri[1:-1])
                 obj._nodetype = URIRef
