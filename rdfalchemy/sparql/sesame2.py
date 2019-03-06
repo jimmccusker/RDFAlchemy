@@ -124,7 +124,7 @@ class SesameGraph(SPARQLGraph):
         req.add_header('Content-Type', 'text/rdf+n3')
         try:
             result = urlopen(req).read()
-        except HTTPError, e:
+        except HTTPError as e:
             if e.code == 204:
                 return
             else:
@@ -143,7 +143,7 @@ class SesameGraph(SPARQLGraph):
         req.get_method = lambda: 'DELETE'
         try:
             result = urlopen(req).read()
-        except HTTPError, e:
+        except HTTPError as e:
             if e.code == 204:
                 return
             else:
@@ -257,7 +257,7 @@ class SesameGraph(SPARQLGraph):
         try:
             result = urlopen(req).read()
             log.debug("Result: " + result)
-        except HTTPError, e:
+        except HTTPError as e:
             # 204 is actually the "success" code
             if e.code == 204:
                 return

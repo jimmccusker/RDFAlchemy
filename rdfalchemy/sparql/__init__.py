@@ -206,13 +206,13 @@ class SPARQLGraph(object):
             values = self.predicates(subject, object)
 
         try:
-            retval = values.next()
+            retval = next(values)
         except StopIteration:
             retval = default
         else:
             if any is False:
                 try:
-                    next = values.next()
+                    next = next(values)
                     assert next
                     msg = ("While trying to find a value for (%s, %s, %s) the "
                            "following multiple values where found:\n" %
@@ -338,7 +338,7 @@ class SPARQLGraph(object):
             return self.parsers[resultMethod](url)
         except LookupError:
             raise ValueError("Invalid resultMethod: %s" % resultMethod)
-        except HTTPError, e:
+        except HTTPError as e:
             if e.code == 400:  # and e.msg.startswith('Parse_error'):
                 errmsg = e.fp.read()
                 submsg = re.search(

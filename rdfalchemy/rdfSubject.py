@@ -5,6 +5,7 @@ rdfalchemy.py - a Simple API for RDF
 Requires rdflib <http://www.rdflib.net/> version 2.3 ??.
 
 """
+from __future__ import print_function
 
 from rdflib import ConjunctiveGraph, __version__ as rdflibversion
 from rdflib import BNode, RDF, URIRef
@@ -164,7 +165,7 @@ class rdfSubject(object):
             for pred, obj in filters[1:]:
                 log.debug("Checking %s, %s" % (pred, obj))
                 try:
-                    cls.db.triples((sub, pred, obj)).next()
+                    next(cls.db.triples((sub, pred, obj)))
                 except:
                     log.warn("No %s" % sub)
                     break
@@ -328,6 +329,6 @@ class rdfSubject(object):
         returning all predicate object pairs with qnames"""
         db = db or self.db
         for p, o in db.predicate_objects(self.resUri):
-            print "%20s = %s" % (db.qname(p), str(o))
-        print " "
+            print("%20s = %s" % (db.qname(p), str(o)))
+        print(" ")
 

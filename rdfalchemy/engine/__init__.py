@@ -69,7 +69,7 @@ def create_engine(url='', identifier="", create=False):
             from ZODB.FileStorage import FileStorage
             openstr = os.path.abspath(os.path.expanduser(url[7:]))
             if not os.path.exists(openstr) and not create:
-                raise("File not found: %s" % openstr)
+                raise "File not found: %s"
             fs = FileStorage(openstr)
         else:
             from ZEO.ClientStorage import ClientStorage

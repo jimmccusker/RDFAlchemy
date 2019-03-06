@@ -7,6 +7,7 @@ Created by Philip Cooper on 2008-04-29.
 Copyright (c) 2008 Openvest.
 BSD License.
 """
+from __future__ import print_function
 from rdfalchemy.sparql import SPARQLGraph
 from rdfalchemy import __version__
 import sys
@@ -78,11 +79,11 @@ def main(url=None):
 
         result = SPARQLGraph(url).query(
             query, resultMethod=opts.format, rawResults=True)
-        print >>output, result.read()
+        print(result.read(), file=output)
 
-    except Usage, err:
-        print >> sys.stderr, sys.argv[0].split("/")[-1] + ": " + str(err.msg)
-        print >> sys.stderr, "\t for help use --help"
+    except Usage as err:
+        print(sys.argv[0].split("/")[-1] + ": " + str(err.msg), file=sys.stderr)
+        print("\t for help use --help", file=sys.stderr)
         return 2
 
 

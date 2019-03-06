@@ -1,3 +1,4 @@
+from __future__ import print_function
 from datetime import datetime
 from rdfalchemy.sparql.sesame2 import SesameGraph
 

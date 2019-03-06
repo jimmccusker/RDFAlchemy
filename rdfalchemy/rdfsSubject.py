@@ -10,6 +10,7 @@ __ ::http://www.w3.org/TR/rdf-schema/
 Created by Philip Cooper on 2008-05-14.
 Copyright (c) 2008 Openvest. All rights reserved.
 """
+from __future__ import absolute_import
 
 from rdfalchemy import (
     rdfSubject,
@@ -24,12 +25,12 @@ try:
 except:
     from six import PY3
 from rdflib.term import Identifier
-from descriptors import (
+from .descriptors import (
     rdfSingle,
     rdfMultiple,
     owlTransitive
 )
-from orm import mapper, allsub
+from .orm import mapper, allsub
 
 import logging
 log = logging.getLogger(__name__)

@@ -1,3 +1,4 @@
+from __future__ import print_function
 import urllib2
 import os
 #import sys
@@ -99,11 +100,11 @@ if __name__ == '__main__':
 
     # load every details we're interested in to the maingraph in memory
     # (actually, only the 50 first films)
-    print "Select subjects for french films with SPARQLStore -> SPARQWrapper:"
-    print "------------------------------------------------------------------"
+    print("Select subjects for french films with SPARQLStore -> SPARQWrapper:")
+    print("------------------------------------------------------------------")
     #for film in graph.subjects(subject, french_film):
     for film in islice( graph.subjects(subject, french_film), 50):
-        print film
+        print(film)
 
         # We don't load every details with
         #     for p, o in graph.predicate_objects(film):
@@ -118,23 +119,23 @@ if __name__ == '__main__':
         log = logging.getLogger('rdfalchemy.rdfSubject')
         log.setLevel(logging.DEBUG)
 
-    print
-    print "Actors in french films :"
-    print "------------------------"
+    print()
+    print("Actors in french films :")
+    print("------------------------")
     # We limit the number of elements processed
     #for f in Film.filter_by(subject = french_film):
     for f in islice( Film.filter_by(subject = french_film), 10):
-        print "*", f.title.encode("utf-8"), '/', f.frtitle.encode("utf-8"), "*"
+        print("*", f.title.encode("utf-8"), '/', f.frtitle.encode("utf-8"), "*")
         for a in f.actor:
-            print 'starring', 
+            print('starring', end=' ') 
             if not a.name:
-                print a
+                print(a)
             else:
-                print a.name.encode("utf-8"), '/', a.frname.encode("utf-8")
-        print
+                print(a.name.encode("utf-8"), '/', a.frname.encode("utf-8"))
+        print()
 
-    print
-    print "Films starring Michel Piccoli :"
-    print "-------------------------------"
+    print()
+    print("Films starring Michel Piccoli :")
+    print("-------------------------------")
     for f in Film.filter_by(subject = french_film, actor = URIRef('http://dbpedia.org/resource/Michel_Piccoli')):
-        print '-', f.title.encode("utf-8"), '/', f.frtitle.encode("utf-8")
+        print('-', f.title.encode("utf-8"), '/', f.frtitle.encode("utf-8"))

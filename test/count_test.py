@@ -25,7 +25,7 @@ Person.c = rdfalchemy.rdfContainer(FOAF.seq)
 
 
 def test_multi():
-    p = Person.ClassInstances().next()
+    p = next(Person.ClassInstances())
     p.m = [1, 2.2, 0, 'a', '', 'c']
     assert len(Person.db) == 8
 
@@ -35,7 +35,7 @@ def test_multi():
 
 def test_list():
     # set and reset a list
-    p = Person.ClassInstances().next()
+    p = next(Person.ClassInstances())
     p.l = [10, 2.3, 0, 'A', '', 'C']
     assert len(Person.db) == 18
 
@@ -44,7 +44,7 @@ def test_list():
 
 
 def test_seq():
-    p = Person.ClassInstances().next()
+    p = next(Person.ClassInstances())
     p.c = range(10)
     assert len(Person.db) == 24
 
