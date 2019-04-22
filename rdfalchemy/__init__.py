@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from rdflib import URIRef, BNode, Namespace, RDF, RDFS
 from rdfalchemy.Literal import Literal
 from rdfalchemy.rdfSubject import rdfSubject
@@ -9,7 +10,7 @@ from rdfalchemy.descriptors import (
     rdfContainer,
     owlTransitive
 )
-from engine import (
+from .engine import (
     create_engine,
     engine_from_config
 )

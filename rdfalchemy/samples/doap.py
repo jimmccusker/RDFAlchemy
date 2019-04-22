@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 from rdfalchemy import rdfSingle, rdfMultiple
 from rdfalchemy.rdfSubject import rdfSubject

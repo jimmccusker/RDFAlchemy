@@ -1,5 +1,9 @@
 """
 """
+from future import standard_library
+standard_library.install_aliases()
+from builtins import next
+from builtins import object
 from rdflib import URIRef, Literal, BNode, RDF, RDFS
 from rdfalchemy.exceptions import (
     MalformedQueryError,
@@ -12,10 +16,9 @@ from rdfalchemy.sparql.parsers import (
 )
 
 from rdflib import ConjunctiveGraph
-# from rdflib.plugins.parsers.ntriples import NTriplesParser
-
-from urllib2 import urlopen, Request, HTTPError
-from urllib import urlencode
+from urllib.request import urlopen, Request
+from urllib.error import HTTPError
+from urllib.parse import urlencode
 
 import re
 import logging
@@ -74,7 +77,7 @@ class SPARQLGraph(object):
             query = strOrTriple
             if initNs:
                 prefixes = ''.join(["prefix %s: <%s>\n" % (
-                    p, n) for p, n in initNs.items()])
+                    p, n) for p, n in list(initNs.items())])
                 query = prefixes + query
         else:
             s, p, o = strOrTriple
@@ -206,13 +209,13 @@ class SPARQLGraph(object):
             values = self.predicates(subject, object)
 
         try:
-            retval = values.next()
+            retval = next(values)
         except StopIteration:
             retval = default
         else:
             if any is False:
                 try:
-                    next = values.next()
+                    next = next(values)
                     assert next
                     msg = ("While trying to find a value for (%s, %s, %s) the "
                            "following multiple values where found:\n" %
@@ -319,7 +322,7 @@ class SPARQLGraph(object):
         """
         log.debug("Raw Query: %s" % (strOrQuery))
         prefixes = ''.join(
-            ["prefix %s: <%s>\n" % (p, n) for p, n in initNs.items()])
+            ["prefix %s: <%s>\n" % (p, n) for p, n in list(initNs.items())])
         if initBindings:
             query = self._processInitBindings(
                 strOrQuery, initBindings)
@@ -338,7 +341,7 @@ class SPARQLGraph(object):
             return self.parsers[resultMethod](url)
         except LookupError:
             raise ValueError("Invalid resultMethod: %s" % resultMethod)
-        except HTTPError, e:
+        except HTTPError as e:
             if e.code == 400:  # and e.msg.startswith('Parse_error'):
                 errmsg = e.fp.read()
                 submsg = re.search(
@@ -374,7 +377,7 @@ class SPARQLGraph(object):
             return x.group()
 
         re_qvars = re.compile('(?<=[\]\.\;\{\s])\?(%s)' % (
-            '|'.join(initBindings.keys())))
+            '|'.join(list(initBindings.keys()))))
         return re_qvars.sub(varval, query)
 
     def describe(self, s_or_po, initBindings={}, initNs={}):
@@ -395,7 +398,7 @@ class SPARQLGraph(object):
             query = s_or_po
             if initNs:
                 prefixes = ''.join(["prefix %s: <%s>\n" % (p, n)
-                                    for p, n in initNs.items()])
+                                    for p, n in list(initNs.items())])
                 query = prefixes + query
         elif isinstance(s_or_po, URIRef) or isinstance(s_or_po, BNode):
             query = "describe %s" % (s_or_po.n3())

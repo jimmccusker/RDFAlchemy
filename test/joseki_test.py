@@ -1,3 +1,4 @@
+from __future__ import print_function
 from rdfalchemy.sparql import SPARQLGraph
 
 url = 'http://bel-epa.com:8080/joseki/ukpp'

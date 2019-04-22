@@ -1,10 +1,13 @@
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
 from rdfalchemy import rdfSingle
 from rdfalchemy.rdfSubject import rdfSubject
 from rdflib import BNode
 from rdflib import ConjunctiveGraph
 from rdflib import Namespace
 
-from StringIO import StringIO
+from io import StringIO
 
 n3data = """
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.

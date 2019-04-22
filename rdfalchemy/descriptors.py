@@ -6,6 +6,8 @@ Created by Philip Cooper on 2008-02-03.
 Copyright (c) 2008 Openvest. All rights reserved.
 """
 
+from builtins import range
+from builtins import object
 from rdflib import URIRef, BNode, Namespace
 from rdflib.term import Identifier
 from rdfalchemy import rdfSubject, Literal

@@ -10,7 +10,9 @@ __ ::http://www.w3.org/TR/rdf-schema/
 Created by Philip Cooper on 2008-05-14.
 Copyright (c) 2008 Openvest. All rights reserved.
 """
+from __future__ import absolute_import
 
+from builtins import str
 from rdfalchemy import (
     rdfSubject,
     RDF,
@@ -24,12 +26,12 @@ try:
 except:
     from six import PY3
 from rdflib.term import Identifier
-from descriptors import (
+from .descriptors import (
     rdfSingle,
     rdfMultiple,
     owlTransitive
 )
-from orm import mapper, allsub
+from .orm import mapper, allsub
 
 import logging
 log = logging.getLogger(__name__)
@@ -67,7 +69,7 @@ class rdfsSubject(rdfSubject, Identifier):
             obj = type(resUri.resUri).__new__(cls, resUri.resUri)
             obj._nodetype = type(resUri.resUri)
         # create one from a <uri> or _:bnode string
-        elif isinstance(resUri, (str, unicode)):
+        elif isinstance(resUri, (str, str)):
             if resUri[0] == "<" and resUri[-1] == ">":
                 obj = URIRef.__new__(cls, resUri[1:-1])
                 obj._nodetype = URIRef

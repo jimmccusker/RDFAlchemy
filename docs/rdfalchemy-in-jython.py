@@ -1,3 +1,4 @@
+from __future__ import print_function
 # Jena in Jython
 from com.hp.hpl.jena.rdf.model import *
 from com.hp.hpl.jena.vocabulary import *
